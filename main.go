@@ -13,5 +13,15 @@ func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
 
+	fileMenu := fyne.NewMenu("File",
+		fyne.NewMenuItem("New", func() {}),
+		fyne.NewMenuItem("Open", func() {}),
+		fyne.NewMenuItem("Save", func() {}),
+		fyne.NewMenuItemSeparator(),
+		fyne.NewMenuItem("Quit", func() { app.Quit() }),
+	)
+	mainMenu := fyne.NewMainMenu(fileMenu)
+	window.SetMainMenu(mainMenu)
+
 	window.ShowAndRun()
 }
