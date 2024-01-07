@@ -23,5 +23,18 @@ func main() {
 	mainMenu := fyne.NewMainMenu(fileMenu)
 	window.SetMainMenu(mainMenu)
 
+	textBox := widget.NewEntry()
+
+	button := widget.NewButton("Click Me", func() {
+		fmt.Println("Button Clicked")
+	})
+
+	content := container.NewBorder(
+		container.NewVBox(textBox, button),
+		nil, nil, nil,
+		container.New(layout.NewMaxLayout(), nil),
+	)
+	window.SetContent(content)
+
 	window.ShowAndRun()
 }
