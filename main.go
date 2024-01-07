@@ -29,10 +29,28 @@ func main() {
 		fmt.Println("Button Clicked")
 	})
 
+	stringList := make([]string, 0)
+	for i := 0; i < 100; i++ {
+		stringList = append(stringList, fmt.Sprintf("Item %d", i))
+	}
+	list := widget.NewList(
+		func() int {
+			return len(stringList)
+		},
+		func() fyne.CanvasObject {
+			return widget.NewLabel("template")
+		},
+		func(i widget.ListItemID, o fyne.CanvasObject) {
+			o.(*widget.Label).SetText(stringList[i])
+		},
+	)
+
+	listScrollContainer := container.NewVScroll(list)
+
 	content := container.NewBorder(
 		container.NewVBox(textBox, button),
 		nil, nil, nil,
-		container.New(layout.NewMaxLayout(), nil),
+		container.New(layout.NewMaxLayout(), listScrollContainer),
 	)
 	window.SetContent(content)
 
