@@ -34,6 +34,22 @@ func perform_git_add_all() {
 	}
 }
 
+func perform_git_status() {
+	r, err := git.PlainOpen("./test")
+	if err != nil {
+		panic(err)
+	}
+	w, err := r.Worktree()
+	if err != nil {
+		panic(err)
+	}
+	status, err := w.Status()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(status)
+}
+
 func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
