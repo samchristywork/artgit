@@ -50,6 +50,27 @@ func perform_git_status() {
 	fmt.Println(status)
 }
 
+func perform_git_commit(message string) {
+	r, err := git.PlainOpen("./test")
+	if err != nil {
+		panic(err)
+	}
+
+	w, err := r.Worktree()
+	if err != nil {
+		panic(err)
+	}
+
+	author := &object.Signature{
+		Name:  "ArtGit",
+		Email: "ArtGit@example.com",
+		When:  time.Now(),
+	}
+	_, err = w.Commit(message, &git.CommitOptions{
+		Author: author,
+	})
+}
+
 func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
