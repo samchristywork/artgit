@@ -19,6 +19,21 @@ func perform_git_init() {
 	}
 }
 
+func perform_git_add_all() {
+	r, err := git.PlainOpen("./test")
+	if err != nil {
+		panic(err)
+	}
+	w, err := r.Worktree()
+	if err != nil {
+		panic(err)
+	}
+	_, err = w.Add(".")
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
