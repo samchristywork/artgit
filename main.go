@@ -7,7 +7,17 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing/object"
+	"time"
 )
+
+func perform_git_init() {
+	_, err := git.PlainInit("./test", false)
+	if err != nil {
+		panic(err)
+	}
+}
 
 func main() {
 	app := app.New()
