@@ -71,6 +71,25 @@ func perform_git_commit(message string) {
 	})
 }
 
+func get_git_log() object.CommitIter {
+	r, err := git.PlainOpen("./test")
+	if err != nil {
+		panic(err)
+	}
+
+	ref, err := r.Head()
+	if err != nil {
+		panic(err)
+	}
+
+	cIter, err := r.Log(&git.LogOptions{From: ref.Hash()})
+	if err != nil {
+		panic(err)
+	}
+
+	return cIter
+}
+
 func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
