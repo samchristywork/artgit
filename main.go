@@ -91,6 +91,32 @@ func get_git_log() object.CommitIter {
 	return cIter
 }
 
+func watch_directory(callback func()) {
+	w := watcher.New()
+	w.FilterOps(watcher.Write, watcher.Create, watcher.Remove, watcher.Rename)
+	go func() {
+		for {
+			select {
+			case event := <-w.Event:
+				fmt.Println(event)
+				callback()
+			case err := <-w.Error:
+				panic(err)
+			case <-w.Closed:
+				return
+			}
+		}
+	}()
+	err := w.Add("./test")
+	if err != nil {
+		panic(err)
+	}
+	err = w.Start(time.Millisecond * 100)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	app := app.New()
 	window := app.NewWindow("GUI Application")
