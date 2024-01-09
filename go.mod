@@ -5,6 +5,7 @@ go 1.21.1
 require (
 	fyne.io/fyne/v2 v2.4.3
 	github.com/go-git/go-git/v5 v5.11.0
+	github.com/radovskyb/watcher v1.0.7
 )
 
 require (
