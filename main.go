@@ -138,8 +138,9 @@ func main() {
 
 	textBox := widget.NewEntry()
 
-	button := widget.NewButton("Click Me", func() {
-		fmt.Println("Button Clicked")
+	button := widget.NewButton("Commit", func() {
+		perform_git_add_all()
+		perform_git_commit(textBox.Text)
 	})
 
 	stringList := make([]string, 0)
