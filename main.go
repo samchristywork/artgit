@@ -131,6 +131,11 @@ func main() {
 	mainMenu := fyne.NewMainMenu(fileMenu)
 	window.SetMainMenu(mainMenu)
 
+	dirtyIndicator := widget.NewLabel("Clean")
+	dirtyIndicator.TextStyle.Bold = true
+	dirtyIndicator.TextStyle.Italic = true
+	dirtyIndicator.TextStyle.Monospace = true
+
 	textBox := widget.NewEntry()
 
 	button := widget.NewButton("Click Me", func() {
@@ -141,6 +146,7 @@ func main() {
 	for i := 0; i < 100; i++ {
 		stringList = append(stringList, fmt.Sprintf("Item %d", i))
 	}
+
 	list := widget.NewList(
 		func() int {
 			return len(stringList)
@@ -156,7 +162,7 @@ func main() {
 	listScrollContainer := container.NewVScroll(list)
 
 	content := container.NewBorder(
-		container.NewVBox(textBox, button),
+		container.NewVBox(dirtyIndicator, textBox, button),
 		nil, nil, nil,
 		container.New(layout.NewMaxLayout(), listScrollContainer),
 	)
